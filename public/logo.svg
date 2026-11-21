@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <polygon points="19.37,17.71 27.56,15.68 35.18,26.37 43.27,11.81 53.71,9.23 40.09,33.26 55.34,54.65 44.07,55.15 35.26,41.78 27.27,55.88 18.58,56.26 30.57,34.68" fill="#6b2812"/>
+  <polygon points="12.53,14.94 20.91,12.66 27.56,15.68 19.37,17.71" fill="#7a2f17" stroke="#7a2f17" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="23.77,32.74 12.53,14.94 19.37,17.71 30.57,34.68" fill="#8f3a1e" stroke="#8f3a1e" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="20.91,12.66 28.61,23.86 35.18,26.37 27.56,15.68" fill="#8f3a1e" stroke="#8f3a1e" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="11.23,55.74 23.77,32.74 30.57,34.68 18.58,56.26" fill="#a3462a" stroke="#a3462a" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="20.14,55.31 11.23,55.74 18.58,56.26 27.27,55.88" fill="#7a2f17" stroke="#7a2f17" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="28.61,23.86 37.11,8.27 43.27,11.81 35.18,26.37" fill="#a3462a" stroke="#a3462a" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="28.52,40.25 20.14,55.31 27.27,55.88 35.26,41.78" fill="#a3462a" stroke="#a3462a" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="37.11,8.27 47.97,5.32 53.71,9.23 43.27,11.81" fill="#7a2f17" stroke="#7a2f17" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="47.97,5.32 33.60,31.13 40.09,33.26 53.71,9.23" fill="#a3462a" stroke="#a3462a" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="37.50,54.47 28.52,40.25 35.26,41.78 44.07,55.15" fill="#8f3a1e" stroke="#8f3a1e" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="33.60,31.13 49.26,53.90 55.34,54.65 40.09,33.26" fill="#8f3a1e" stroke="#8f3a1e" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="49.26,53.90 37.50,54.47 44.07,55.15 55.34,54.65" fill="#7a2f17" stroke="#7a2f17" stroke-width=".3" stroke-linejoin="round"/>
+  <polygon points="12.53,14.94 20.91,12.66 28.61,23.86 37.11,8.27 47.97,5.32 33.60,31.13 49.26,53.90 37.50,54.47 28.52,40.25 20.14,55.31 11.23,55.74 23.77,32.74" fill="url(#xg)" stroke="#e8946a" stroke-width=".5" stroke-linejoin="round"/>
+  <defs><linearGradient id="xg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9764b"/><stop offset="1" stop-color="#b4532a"/></linearGradient></defs>
+</svg>

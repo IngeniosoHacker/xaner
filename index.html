@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xaner · Avance de obra en 3D</title>
+  <meta name="description" content="Xaner es un BIM fácil de usar para controlar el avance de obra: cards por proyecto, partes y subsecciones, renders isométricos estilo clay y un recorrido 3D en tiempo real sobre formatos abiertos como IFC." />
+  <meta name="theme-color" content="#f3ebdf" />
+  <meta property="og:title" content="Xaner · Avance de obra en 3D" />
+  <meta property="og:description" content="Del plano abierto (IFC) al render en tiempo real. Reporta, aprueba y corrige avances sobre el modelo de tu obra." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body data-active="hero">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="letterbox" aria-hidden="true"><i></i><i></i></div>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Xaner, inicio">
+      <img src="/logo.svg" alt="" width="40" height="40" />
+      <span>Xaner</span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#vistas">Producto</a>
+      <a href="#flujo">Aprobaciones</a>
+      <a href="#formatos">Formatos abiertos</a>
+      <a href="#obra">En obra</a>
+    </nav>
+    <a class="btn btn-sm" href="#contacto">Solicitar demo</a>
+  </header>
+
+  <aside class="hud" aria-hidden="true">
+    <div class="hud-row"><b data-hud="idx">01 / 12</b><span data-hud="label">Exterior · contrapicado</span></div>
+    <div class="hud-row dim"><span data-hud="mode">PERSPECTIVA</span><span>FOV <span data-hud="fov">40°</span></span></div>
+    <div class="hud-row dim"><span>CAM</span><span data-hud="xyz">0 · 0 · 0</span></div>
+    <div class="hud-bar"><i data-hud="bar"></i></div>
+    <div class="hud-note">Escena ilustrativa renderizada en tiempo real en tu navegador</div>
+  </aside>
+
+  <nav class="rail" aria-label="Vistas">
+    <button aria-label="Inicio"></button><button aria-label="Tres vistas"></button><button aria-label="Navegación"></button>
+    <button aria-label="Estados"></button><button aria-label="Aprobaciones"></button><button aria-label="Recorrido"></button>
+    <button aria-label="Niveles"></button><button aria-label="Formatos"></button><button aria-label="Pipeline"></button>
+    <button aria-label="Render clay"></button><button aria-label="En obra"></button><button aria-label="Contacto"></button>
+  </nav>
+
+  <main>
+    <!-- 01 HERO -->
+    <section class="sec hero" id="inicio" data-view>
+      <div class="panel hero-panel left">
+        <p class="eyebrow reveal">BIM fácil de usar · Control de avance de obra</p>
+        <h1 class="reveal">Tu obra, del plano al <em>render</em> en tiempo real.</h1>
+        <p class="lead reveal">Xaner convierte el modelo de tu edificio en un tablero vivo: proyectos, partes y subsecciones en cards, renders isométricos estilo <em>clay</em> y un recorrido 3D navegable donde cada avance sube por la cadena de aprobación y cada corrección baja por ella.</p>
+        <div class="cta-row reveal">
+          <a class="btn" href="#contacto">Solicitar demo</a>
+          <a class="btn ghost" href="#vistas">Ver cómo funciona ↓</a>
+        </div>
+        <ul class="chips reveal">
+          <li>IFC · estándar abierto</li><li>WebGPU / WebGL2</li><li>Tablet y móvil</li><li>Funciona sin señal</li>
+        </ul>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span></span>Desliza para recorrer la obra</div>
+    </section>
+
+    <!-- 02 TRES VISTAS -->
+    <section class="sec" id="vistas" data-view>
+      <div class="panel right">
+        <p class="eyebrow reveal">01 · Tres vistas, un mismo modelo</p>
+        <h2 class="reveal">De la card al recorrido sin cambiar de herramienta.</h2>
+        <div class="cards3">
+          <article class="mini reveal">
+            <span class="tag">Cards 2D</span>
+            <h3>Para todos, sobre todo en móvil</h3>
+            <p>Grid de proyectos, partes y subsecciones con miniaturas pre-renderizadas en servidor.</p>
+          </article>
+          <article class="mini reveal">
+            <span class="tag">Render de área</span>
+            <h3>Supervisores y maestros de obra</h3>
+            <p>Visor 3D acotado a la subsección, con cámara isométrica ortográfica y estilo clay.</p>
+          </article>
+          <article class="mini reveal">
+            <span class="tag">Recorrido</span>
+            <h3>Residentes, gerencia y clientes</h3>
+            <p>El modelo completo o un nivel, navegable a clics con transiciones de cámara.</p>
+          </article>
+        </div>
+        <p class="note reveal"><b>“Tiempo real”</b> significa que tu navegador dibuja el modelo a 30–60 fps con la GPU del dispositivo. No es un video: es el modelo, vivo, como en esta página.</p>
+      </div>
+    </section>
+
+    <!-- 03 NAVEGACIÓN -->
+    <section class="sec" id="navegacion" data-view>
+      <div class="panel left">
+        <p class="eyebrow reveal">02 · Navegación por cards</p>
+        <h2 class="reveal">Proyecto → Parte → Subsección.</h2>
+        <ol class="crumbs reveal">
+          <li>Proyectos</li><li>Partes <small>Fachadas · Estructura · Electricidad · Plomería</small></li><li>Subsecciones <small>asignables a contratista o empleado</small></li><li>Render isométrico + recorrido</li>
+        </ol>
+        <article class="card-demo reveal" aria-label="Ejemplo de card de subsección">
+          <div class="cd-thumb"><span class="cd-swatch"></span></div>
+          <div class="cd-body">
+            <p class="cd-k">Fachadas · Subsección</p>
+            <h3>Fachada norte · niveles 2 a 7</h3>
+            <div class="cd-bar" role="img" aria-label="62% aprobado, 18% reportado pendiente"><i style="--w:62%"></i><i class="pend" style="--w:18%"></i></div>
+            <dl>
+              <div><dt>Aprobado</dt><dd>62%</dd></div>
+              <div><dt>En revisión</dt><dd>18%</dd></div>
+              <div><dt>Responsable</dt><dd>Contratista de fachadas</dd></div>
+              <div><dt>Alertas</dt><dd class="warn">1 rechazo abierto</dd></div>
+            </dl>
+          </div>
+        </article>
+        <p class="note reveal">Cada card muestra la miniatura clay, el % aprobado, el % reportado pendiente, el responsable y las alertas (rechazos abiertos, permisos vencidos).</p>
+      </div>
+    </section>
+
+    <!-- 04 ESTADOS -->
+    <section class="sec" id="estados" data-view>
+      <div class="panel left">
+        <p class="eyebrow reveal">03 · Estados visuales</p>
+        <h2 class="reveal">El modelo te dice qué está hecho, qué falta y qué hay que corregir.</h2>
+        <ul class="legend">
+          <li class="reveal"><i class="sw ghost"></i><div><b>No iniciado</b><span>Gris claro al 15%, fantasma para dar contexto.</span></div></li>
+          <li class="reveal"><i class="sw reported"></i><div><b>Reportado · en aprobación</b><span>Color de la disciplina al ~40%, desaturado.</span></div></li>
+          <li class="reveal"><i class="sw approved"></i><div><b>Aprobado</b><span>Color sólido de la disciplina.</span></div></li>
+          <li class="reveal"><i class="sw rejected"></i><div><b>Rechazado · en corrección</b><span>Contorno rojo y pin con el comentario.</span></div></li>
+          <li class="reveal"><i class="sw corrected"></i><div><b>Corregido · re-enviado</b><span>Como “reportado”, con insignia de re-envío #n.</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 05 FLUJO -->
+    <section class="sec" id="flujo" data-view>
+      <div class="panel right">
+        <p class="eyebrow reveal">04 · Avances y correcciones</p>
+        <h2 class="reveal">Los avances suben. Las correcciones bajan. Nada se pierde.</h2>
+        <ol class="chain reveal">
+          <li><b>N0</b><span>Obrero</span><small>Reporta: fotos, % y elementos</small></li>
+          <li><b>N1</b><span>Supervisor</span><small>“Entregar”</small></li>
+          <li><b>N2</b><span>Maestro de obras</span><small>“Revisar y reportar”</small></li>
+          <li><b>N3</b><span>Residente</span><small>“Autorizar”</small></li>
+        </ol>
+        <div class="issue reveal">
+          <div class="issue-pin" aria-hidden="true"></div>
+          <div>
+            <p class="cd-k">Issue · N6 fachada este · re-envío pendiente</p>
+            <p>Cada rechazo crea un <b>issue</b> con pin 3D sobre el elemento, al menos una foto, un texto y el punto de vista de la cámara, para que quien lo abra vea exactamente lo mismo. Compatible con <b>BCF</b> para llevarlo a Revit, Navisworks u otras herramientas.</p>
+          </div>
+        </div>
+        <ul class="ticks reveal">
+          <li>Cadena configurable por proyecto: salta niveles o agrega supervisión externa.</li>
+          <li>El rechazo baja en cascada notificando a cada nivel.</li>
+          <li>Tiempos máximos por nivel y escalamiento automático.</li>
+          <li>Trazabilidad: quién, cuándo, desde qué dispositivo y con qué evidencia.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 06 RECORRIDO -->
+    <section class="sec" id="recorrido" data-view>
+      <div class="panel right">
+        <p class="eyebrow reveal">05 · Recorrido a clics</p>
+        <h2 class="reveal">Entra al edificio antes de que exista.</h2>
+        <div class="grid2">
+          <div class="reveal"><h3>Puntos de vista</h3><p>Haz clic en un elemento o zona y la cámara vuela suave a su encuadre.</p></div>
+          <div class="reveal"><h3>Selección precisa</h3><p>Raycasting acelerado con BVH para tocar un elemento entre millones: “estas 4 columnas”.</p></div>
+          <div class="reveal"><h3>Modo caminar</h3><p>Primera persona con colisión simple, para clientes y gerencia.</p></div>
+          <div class="reveal"><h3>Rendimiento</h3><p>Carga por nivel, instancing y LOD. Objetivo: 30 fps en una tablet de gama media.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 NIVELES -->
+    <section class="sec" id="niveles" data-view>
+      <div class="panel left">
+        <p class="eyebrow reveal">06 · Selector de niveles</p>
+        <h2 class="reveal">Corta el edificio y mira dentro de cada piso.</h2>
+        <p class="lead reveal">Elige un nivel: Xaner oculta los de arriba y aplica un plano de sección horizontal. Ves la planta en 3D, quién trabaja ahí y qué está pendiente.</p>
+        <div class="levels reveal" role="img" aria-label="Selector de niveles con N5 activo">
+          <span>N13</span><span>N12</span><span>N11</span><span>N10</span><span>N9</span><span>N8</span><span>N7</span><span>N6</span><span class="on">N5</span><span>N4</span><span>N3</span><span>N2</span><span>N1</span><span>PB</span>
+        </div>
+        <p class="note reveal">Reporta avance seleccionando elementos en 3D o, si la tarea no se puede separar (pintura de un muro), con un porcentaje. Medición en m² y m³, no solo en %.</p>
+      </div>
+    </section>
+
+    <!-- 08 FORMATOS ABIERTOS -->
+    <section class="sec" id="formatos" data-view>
+      <div class="panel right dark">
+        <p class="eyebrow reveal">07 · Formatos abiertos</p>
+        <h2 class="reveal">El render nace de tus planos, en formatos de código abierto.</h2>
+        <p class="lead reveal">Por ahora generamos el render a partir de formatos abiertos de planos y modelos BIM. <b>IFC</b> (estándar ISO de buildingSMART) es la entrada principal: lo exportan Revit, ArchiCAD, Tekla y Allplan de forma nativa.</p>
+        <ul class="stack reveal">
+          <li><b>IFC</b><span>Modelo BIM con semántica: muros, columnas, niveles, sistemas</span></li>
+          <li><b>web-ifc</b><span>Parser WASM, licencia MIT</span></li>
+          <li><b>IfcOpenShell</b><span>Procesamiento en servidor, LGPL</span></li>
+          <li><b>That Open Fragments</b><span>Geometría BIM optimizada, MIT</span></li>
+          <li><b>Three.js</b><span>Motor 3D web, MIT</span></li>
+          <li><b>glTF 2.0 + Meshopt</b><span>Geometría comprimida para la web</span></li>
+          <li><b>BCF</b><span>Issues interoperables entre herramientas</span></li>
+        </ul>
+        <p class="note reveal">Los avances se guardan contra el <b>GlobalId</b> de cada elemento, no contra la geometría. Si subes una nueva versión del modelo, conservas el avance de todo lo que no cambió.</p>
+      </div>
+    </section>
+
+    <!-- 09 PIPELINE -->
+    <section class="sec" id="pipeline" data-view>
+      <div class="panel left">
+        <p class="eyebrow reveal">08 · Del archivo al modelo vivo</p>
+        <h2 class="reveal">Procesamos el modelo una vez. Tu navegador lo dibuja siempre.</h2>
+        <ol class="steps">
+          <li class="reveal"><b>Ingesta</b><span>Subida directa y versionada del archivo, procesada en cola.</span></li>
+          <li class="reveal"><b>Lectura semántica</b><span>ID estable, tipo, nivel, disciplina, sistema, material, área y volumen de cada elemento.</span></li>
+          <li class="reveal"><b>Partes y subsecciones automáticas</b><span>Agrupación por disciplina, nivel y fachada. Tu equipo revisa y ajusta en un editor.</span></li>
+          <li class="reveal"><b>Geometría optimizada</b><span>Instancing, niveles de detalle y carga por nivel o zona.</span></li>
+          <li class="reveal"><b>Miniaturas clay</b><span>Render en servidor de cada parte con la cámara isométrica estándar.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 10 CLAY -->
+    <section class="sec" id="clay" data-view>
+      <div class="panel right">
+        <p class="eyebrow reveal">09 · Estilo clay isométrico</p>
+        <h2 class="reveal">Claro como una maqueta. Ligero como una app.</h2>
+        <p class="lead reveal">Materiales mate, luz suave, oclusión ambiental y contornos sutiles. Sin fotorrealismo: el modelo se lee de un vistazo y corre en las tablets de obra.</p>
+        <ul class="palette reveal" aria-label="Paleta por disciplina">
+          <li><i style="--c:#c4673f"></i>Estructura</li>
+          <li><i style="--c:#efe2cc"></i>Arquitectura</li>
+          <li><i style="--c:#f0d77a"></i>Eléctrico</li>
+          <li><i style="--c:#9cc3df"></i>Hidráulico</li>
+          <li><i style="--c:#a9d8c2"></i>HVAC</li>
+        </ul>
+        <div class="grid2">
+          <div class="reveal"><h3>WebGPU con respaldo WebGL2</h3><p>Usa la GPU moderna cuando existe y cae a WebGL2 cuando no.</p></div>
+          <div class="reveal"><h3>Calidad adaptativa</h3><p>Si los fps bajan, apaga sombras y AO sin que lo notes.</p></div>
+          <div class="reveal"><h3>App instalable (PWA)</h3><p>Escritorio y tablet con una sola base.</p></div>
+          <div class="reveal"><h3>Modo sin señal</h3><p>El reporte se guarda en el dispositivo y se envía al volver la red.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 EN OBRA -->
+    <section class="sec" id="obra" data-view>
+      <div class="panel left">
+        <p class="eyebrow reveal">10 · En obra</p>
+        <h2 class="reveal">Quién trabaja dónde, haciendo qué y con qué permiso.</h2>
+        <div class="grid2">
+          <div class="reveal"><h3>Contratistas por obra</h3><p>Cada contratista es dueño de sus datos y comparte solo lo de esa obra.</p></div>
+          <div class="reveal"><h3>Check-in QR por nivel</h3><p>El trabajador escanea al llegar a su zona. Sin rastreo fuera del horario ni de la obra.</p></div>
+          <div class="reveal"><h3>Permisos de trabajo digitales</h3><p>Alturas, trabajo en caliente, espacios confinados, eléctrico/LOTO e izaje. Firmados en tablet, con foto y checklist.</p></div>
+          <div class="reveal"><h3>Certificaciones vigentes</h3><p>Nadie entra a un permiso sin la certificación al día. Auditoría inmutable y PDF para inspecciones.</p></div>
+        </div>
+        <div class="integration reveal">
+          <span class="int-dot" aria-hidden="true"></span>
+          <p><b>Integración de análisis de datos con AndRho.</b> Conecta los avances, rechazos y tiempos de corrección de Xaner con AndRho para medir productividad por contratista y ver la obra junto al resto de tu negocio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 CTA -->
+    <section class="sec cta" id="contacto" data-view>
+      <div class="panel right cta-panel">
+        <p class="eyebrow reveal">Próximamente</p>
+        <ul class="soon reveal">
+          <li>Fotos 360° ubicadas en el modelo</li>
+          <li>Gaussian splatting: lo construido contra lo diseñado</li>
+          <li>Detección de avance con IA a partir de las fotos</li>
+        </ul>
+        <h2 class="reveal">Lleva Xaner a tu próxima obra.</h2>
+        <p class="lead reveal">Buscamos constructoras para el piloto. Trae un modelo IFC y te mostramos tu edificio en Xaner.</p>
+        <div class="cta-row reveal">
+          <a class="btn" data-contact href="mailto:hola@xaner.app?subject=Piloto%20Xaner">Quiero el piloto</a>
+          <a class="btn ghost" href="#inicio">Volver al inicio ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-in">
+      <a class="brand" href="#inicio"><img src="/logo.svg" alt="" width="32" height="32" /><span>Xaner</span></a>
+      <p class="foot-tag">Control de avance de obra sobre modelos BIM abiertos.</p>
+      <p class="foot-meta">© <span data-year>2026</span> Xaner · Integración de datos con AndRho</p>
+      <p class="made">Creado por <b>Ableitung Labs</b></p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
